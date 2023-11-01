@@ -156,7 +156,7 @@ public class ConceptDescription extends VABModelMap<Object> implements IConceptD
 		return ReferenceHelper.transform(get(ConceptDescription.ISCASEOF));
 	}
 
-	public void setIsCaseOf(Collection<Reference> ref) {
+	public void setIsCaseOf(Collection<IReference> ref) {
 		put(ConceptDescription.ISCASEOF, ref);
 	}
 

@@ -41,7 +41,6 @@ import org.eclipse.basyx.submodel.metamodel.api.reference.enums.KeyElements;
 import org.eclipse.basyx.submodel.metamodel.map.parts.ConceptDescription;
 import org.eclipse.basyx.submodel.metamodel.map.qualifier.HasDataSpecification;
 import org.eclipse.basyx.submodel.metamodel.map.qualifier.Identifiable;
-import org.eclipse.basyx.submodel.metamodel.map.reference.Reference;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -81,7 +80,7 @@ public class ConceptDescriptionXMLConverter {
 			IdentifiableXMLConverter.populateIdentifiable(xmlConceptDescription, Identifiable.createAsFacadeNonStrict(conceptDescription, KeyElements.CONCEPTDESCRIPTION));
 			HasDataSpecificationXMLConverter.populateHasDataSpecification(xmlConceptDescription, HasDataSpecification.createAsFacade(conceptDescription));
 
-			Collection<Reference> handleIsCaseOf = parseIsCaseOfRefs(xmlConceptDescription);
+			Collection<IReference> handleIsCaseOf = parseIsCaseOfRefs(xmlConceptDescription);
 			conceptDescription.setIsCaseOf(handleIsCaseOf);
 
 			conceptDescriptions.add(conceptDescription);
@@ -97,8 +96,8 @@ public class ConceptDescriptionXMLConverter {
 	 *            a Map containing the XML tag &lt;aas:isCaseOf&gt;
 	 * @return a Reference object parsed form the given XML Map
 	 */
-	private static Collection<Reference> parseIsCaseOfRefs(Map<String, Object> xmlObject) {
-		Collection<Reference> references = new HashSet<>();
+	private static Collection<IReference> parseIsCaseOfRefs(Map<String, Object> xmlObject) {
+		Collection<IReference> references = new HashSet<>();
 		List<Map<String, Object>> xmlKeyList = XMLHelper.getList(xmlObject.get(IS_CASE_OF));
 		for (Map<String, Object> xmlKey : xmlKeyList) {
 			references.add(ReferenceXMLConverter.parseReference(xmlKey));
