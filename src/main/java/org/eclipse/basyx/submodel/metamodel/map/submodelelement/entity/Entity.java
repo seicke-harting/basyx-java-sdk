@@ -83,6 +83,16 @@ public class Entity extends SubmodelElement implements IEntity {
 	public void setStatements(Collection<ISubmodelElement> statements) {
 		put(STATEMENT, statements);
 	}
+	
+	public void addStatements(Collection<ISubmodelElement> newStatements) {
+		
+		Collection<ISubmodelElement> statements = getStatements();
+		
+		statements.addAll(newStatements);
+		
+		setStatements(statements);
+		
+	}
 
 	public void setAsset(IReference asset) {
 		put(ASSET, asset);
