@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (C) 2021 the Eclipse BaSyx Authors
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -19,7 +19,7 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 package org.eclipse.basyx.submodel.metamodel.map.qualifier;
@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Referable class
- * 
+ *
  * @author kuhn, schnicke
  *
  */
@@ -71,7 +71,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 
 	/**
 	 * Constructor with mandatory attribute
-	 * 
+	 *
 	 * @param idShort
 	 */
 	public Referable(String idShort) {
@@ -80,7 +80,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 
 	/**
 	 * Constructor with idShort, category and description
-	 * 
+	 *
 	 * @param idShort
 	 *            will be matched case insensitive; may only feature letters,
 	 *            digits, underscores and start with a letter
@@ -101,7 +101,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 
 	/**
 	 * Creates a Referable object from a map
-	 * 
+	 *
 	 * @param map
 	 *            a Referable object as raw map
 	 * @return a Referable object, that behaves like a facade for the given map
@@ -123,7 +123,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 
 	/**
 	 * Check whether all mandatory elements for the metamodel exist in a map
-	 * 
+	 *
 	 * @return true/false
 	 */
 	public static boolean isValid(Map<String, Object> map) {
@@ -133,7 +133,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 	/**
 	 * Creates a Referable object from a map without checking the mandatory
 	 * attributes present
-	 * 
+	 *
 	 * @param map
 	 * @param type
 	 * @return
@@ -195,7 +195,7 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 
 	/**
 	 * Sets the parent and additionally updates the own reference
-	 * 
+	 *
 	 * @param obj
 	 */
 	public void setParent(IReference obj) {
@@ -221,10 +221,18 @@ public class Referable extends VABModelMap<Object> implements IReferable {
 	@Override
 	public IReference getReference() {
 		List<IKey> keys = new ArrayList<>();
-		IReference parent = getParent();
-		if (parent != null) {
-			keys.addAll(parent.getKeys());
-		}
+
+		/*
+		 * Maximise compatibility with the AASX Package Explorer
+		 * Otherwise AAS reference will be listed as aas:key in aas:submodelRef
+		*/
+
+//		IReference parent = getParent();
+
+//		if (parent != null) {
+//			keys.addAll(parent.getKeys());
+//		}
+
 		keys.add(new Key(elem, isLocal(), getId(), getKeyType()));
 		return new Reference(keys);
 	}
