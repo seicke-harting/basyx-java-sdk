@@ -1,3 +1,6 @@
+*.code-workspace
+*.vscode
+
 regressiontest/
 
 .classpath
@@ -75,4 +78,3 @@ local.properties
 *.iml
 .moquette_uuid
 file_sme.json
-basyx-java-sdk.code-workspace
